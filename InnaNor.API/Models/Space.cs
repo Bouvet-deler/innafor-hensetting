@@ -1,8 +1,10 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using Microsoft.EntityFrameworkCore;
 
 namespace InnaNor.API.Models;
 
+[Index(nameof(GlobalId), IsUnique = true)]
 public class Space
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
