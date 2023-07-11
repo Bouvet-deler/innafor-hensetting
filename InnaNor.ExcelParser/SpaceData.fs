@@ -1,10 +1,12 @@
 ﻿namespace ExcelParser
 
 open System
+open System.IO
 open DocumentFormat.OpenXml.Packaging
 open DocumentFormat.OpenXml.Spreadsheet
 open Common
 open InnaNor.API.Models
+open Microsoft.EntityFrameworkCore
 open Microsoft.FSharp.Core
 
 module SpaceData =
@@ -308,8 +310,10 @@ module SpaceData =
 
             let locations, spaces = spacesFromRows rows
 
-            for location in locations do
-                printfn $" %A{location}"
-
-            for space in spaces do
-                printfn $" %A{space.Name}"
+            use dbContext =
+                new InnaNorContext((DbContextOptionsBuilder<InnaNorContext>().UseSqlite "Data Source=../../../../innanor.db").Options)
+                
+            dbContext.Locations.AddRange locations.Values
+            dbContext.Spaces.AddRange spaces
+            
+            dbContext.SaveChanges() |> ignore
