@@ -2,6 +2,12 @@
 Microsoft Visual Studio Solution File, Format Version 12.00
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InnaNor.API", "InnaNor.API\InnaNor.API.csproj", "{E3C5018E-F538-4E89-8ACD-1FDF00BC9BD8}"
 EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "InnaNor.ExcelParser", "InnaNor.ExcelParser\InnaNor.ExcelParser.fsproj", "{5382C5A7-61CB-4F73-978D-6B227855DCB9}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "Innanor.ExcelParser.Tests", "Innanor.ExcelParser.Tests\Innanor.ExcelParser.Tests.fsproj", "{81C8136E-81A4-495B-9620-A0126386C7DF}"
+EndProject
+Project("{F2A71F9B-5D33-465A-A702-920D77279786}") = "InnaNor.ExcelParser.Cli", "InnaNor.ExcelParser.Cli\InnaNor.ExcelParser.Cli.fsproj", "{5FA9463D-B87E-4076-8CD1-BDDE0539AB25}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -12,5 +18,17 @@ Global
 		{E3C5018E-F538-4E89-8ACD-1FDF00BC9BD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E3C5018E-F538-4E89-8ACD-1FDF00BC9BD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E3C5018E-F538-4E89-8ACD-1FDF00BC9BD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5382C5A7-61CB-4F73-978D-6B227855DCB9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5382C5A7-61CB-4F73-978D-6B227855DCB9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5382C5A7-61CB-4F73-978D-6B227855DCB9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5382C5A7-61CB-4F73-978D-6B227855DCB9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{81C8136E-81A4-495B-9620-A0126386C7DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{81C8136E-81A4-495B-9620-A0126386C7DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{81C8136E-81A4-495B-9620-A0126386C7DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{81C8136E-81A4-495B-9620-A0126386C7DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5FA9463D-B87E-4076-8CD1-BDDE0539AB25}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5FA9463D-B87E-4076-8CD1-BDDE0539AB25}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5FA9463D-B87E-4076-8CD1-BDDE0539AB25}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5FA9463D-B87E-4076-8CD1-BDDE0539AB25}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
