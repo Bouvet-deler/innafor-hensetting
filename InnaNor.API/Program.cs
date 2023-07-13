@@ -25,6 +25,38 @@ app.UseHttpsRedirection();
 
 app.UseAuthorization();
 
-app.MapControllers();
+// app.MapControllers();
+
+app.MapGet("/spaces", (InnaNorContext db) =>
+    db.Spaces.Select(s => new
+    {
+        s.Id,
+        s.Name,
+        s.Beskrivelse,
+    }));
+app.MapGet("/spaces/{id:int}", (int id, InnaNorContext db) => db.Spaces.Find(id));
+app.MapGet("/spaces/{id:int}/reservations", (int id, InnaNorContext db) => db.Reservations.Where(r => r.SpaceId == id));
+
+app.MapGet("/locations", (InnaNorContext db) =>
+    db.Locations.Select(l => new
+    {
+        l.Id,
+        l.TrackNumber,
+        l.Area,
+        l.Status,
+    }));
+app.MapGet("/locations/{id:int}", (int id, InnaNorContext db) => db.Locations.Find(id));
+
+app.MapGet("/reservations", (InnaNorContext db) =>
+    db.Reservations.Select(r => new
+    {
+        r.Id,
+        SpaceId = r.Space.Id,
+        r.Space.Name,
+        r.Reserver,
+        r.StartTime,
+        r.EndTime,
+    }));
+app.MapGet("/reservations/{id:int}", (int id, InnaNorContext db) => db.Reservations.Find(id));
 
 app.Run();
