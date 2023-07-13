@@ -13,4 +13,5 @@ public class InnaNorContext : DbContext
 
     public DbSet<Space> Spaces { get; set; }
     public DbSet<Location> Locations { get; set; }
+    public DbSet<Reservation> Reservations { get; set; }
 }
