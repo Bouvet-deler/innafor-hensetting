@@ -16,6 +16,7 @@
     <ItemGroup>
         <Compile Include="Common.fs" />
         <Compile Include="SpaceData.fs" />
+        <Compile Include="ReservationData.fs" />
     </ItemGroup>
 
 </Project>

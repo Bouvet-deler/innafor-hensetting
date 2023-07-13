@@ -52,3 +52,14 @@ module Common =
             |> Seq.mapi (fun i e -> string i, e.InnerText)
             |> Map.ofSeq
         sharedStrings
+
+    let getSheet (wbPart: WorkbookPart) sheetId =
+        match wbPart.GetPartById(sheetId) with
+        | :? WorksheetPart as wsPart -> Some(wsPart)
+        | _ -> None
+
+    let getSheets (wbPart: WorkbookPart) = 
+        wbPart.Workbook.Descendants<Sheet>()
+        |> Seq.filter (fun sheet -> sheet.State <> SheetStateValues.Hidden)
+        |> Seq.map (fun sheet -> sheet.Id.Value)
+        |> Seq.choose (getSheet wbPart)
