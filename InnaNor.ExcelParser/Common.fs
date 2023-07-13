@@ -1,6 +1,7 @@
 ﻿namespace ExcelParser
 
 open System
+open DocumentFormat.OpenXml.Packaging
 open DocumentFormat.OpenXml.Spreadsheet
 
 module Common =
@@ -41,3 +42,13 @@ module Common =
     // but it should be sufficient for our use
     let parseStrangeExcelDate (excelDateString: string) =
         excelDateString |> double |> DateTime.FromOADate
+
+    let getSharedStrings (wbPart: WorkbookPart) =
+        let sharedStringTablePart =
+            wbPart.GetPartsOfType<SharedStringTablePart>() |> Seq.head
+
+        let sharedStrings =
+            sharedStringTablePart.SharedStringTable.ChildElements
+            |> Seq.mapi (fun i e -> string i, e.InnerText)
+            |> Map.ofSeq
+        sharedStrings

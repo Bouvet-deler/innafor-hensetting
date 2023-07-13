@@ -279,18 +279,12 @@ module SpaceData =
         spacesFactory getCellStringValue Map.empty cells
 
 
+
     let parse (path: string) =
         use doc = SpreadsheetDocument.Open(path, false)
         let wbPart = doc.WorkbookPart
 
-        let sharedStringTablePart =
-            wbPart.GetPartsOfType<SharedStringTablePart>() |> Seq.head
-
-        let sharedStrings =
-            sharedStringTablePart.SharedStringTable.ChildElements
-            |> Seq.mapi (fun i e -> string i, e.InnerText)
-            |> Map.ofSeq
-
+        let sharedStrings = getSharedStrings wbPart
         let spacesFromRows = createSpaces sharedStrings
 
         let sheets =
