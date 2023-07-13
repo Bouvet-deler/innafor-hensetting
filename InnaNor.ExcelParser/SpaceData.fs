@@ -130,12 +130,6 @@ module SpaceData =
     let banedataColumnStringValue (rawValues: Map<BanedataHeader, Cell>) (banedataHeader: BanedataHeader) =
         rawValues.TryFind banedataHeader
 
-    let getCellStringValue (sharedStrings: Map<string, string>) (cell: Cell) =
-        if cell.DataType = CellValues.SharedString then
-            Some sharedStrings[cell.InnerText]
-        else
-            Some cell.InnerText
-
     let getCells (row: Row) : Cell seq = row.Elements<Cell>()
 
     exception private TableNotFoundException
@@ -147,7 +141,7 @@ module SpaceData =
 
             if Seq.length cells > 4 then
                 let header =
-                    cells |> Seq.choose getCellValue |> Seq.map banedataHeader |> List.ofSeq
+                    cells |> Seq.map getCellValue |> Seq.map banedataHeader |> List.ofSeq
 
                 (header, remainingRows)
             else
@@ -170,7 +164,7 @@ module SpaceData =
         | rawSpace :: remainingRawSpaces ->
 
             let cellStringOption =
-                banedataColumnStringValue rawSpace >> (Option.bind getCellStringValue)
+                banedataColumnStringValue rawSpace >> (Option.map getCellStringValue)
 
             let cellStringValue = cellStringOption >> (Option.defaultValue "")
 

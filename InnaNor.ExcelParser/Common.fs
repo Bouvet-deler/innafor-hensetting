@@ -1,6 +1,7 @@
 ﻿namespace ExcelParser
 
 open System
+open DocumentFormat.OpenXml.Spreadsheet
 
 module Common =
 
@@ -29,6 +30,12 @@ module Common =
             | chars -> raise (invalidArg (nameof cellReference) $"the given cellReference '{cellReference}' contains one or more invalid characters '{chars[0]}'")
 
         calculate cellReferenceCharacters 0 0
+
+    let getCellStringValue (sharedStrings: Map<string, string>) (cell: Cell) =
+        if cell.DataType = CellValues.SharedString then
+            sharedStrings[cell.InnerText]
+        else
+            cell.InnerText
 
     // Not 100% sure this will always return the correct date,
     // but it should be sufficient for our use
