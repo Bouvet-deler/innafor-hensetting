@@ -1,5 +1,6 @@
 ﻿using InnaNor.API.DTOs;
 using InnaNor.API.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -73,6 +74,32 @@ app.MapGet("/reservations", (InnaNorContext db) =>
         StartTime = r.StartTime,
         EndTime = r.EndTime,
     }));
-app.MapGet("/reservations/{id:guid}", (Guid id, InnaNorContext db) => db.Reservations.Find(id));
+app.MapPost("/reservations",
+    Results<Created<Reservation>, ValidationProblem> (ReservationCreationDto reservation, InnaNorContext db) =>
+    {
+        var space = db.Spaces.Find(reservation.SpaceId);
+        if (space == null)
+            return TypedResults.ValidationProblem(new Dictionary<string, string[]>
+                { { "SpaceId", new[] { $"No spaces found with the given SpaceId {reservation.SpaceId}" } } });
+        var createdReservation = db.Reservations.Add(new Reservation
+        {
+            SpaceId = reservation.SpaceId,
+            Space = space,
+            Reserver = reservation.Reserver,
+            StartTime = reservation.StartTime,
+            EndTime = reservation.EndTime,
+            Notes = reservation.Notes,
+        }).Entity;
+        db.SaveChanges();
+        return TypedResults.Created($"/reservations/${createdReservation.Id}", createdReservation);
+    });
+app.MapGet("/reservations/{id:guid}",
+    Results<Ok<Reservation>, NotFound> (Guid id, InnaNorContext db) =>
+    {
+        var reservation = db.Reservations
+            .Include(r => r.Space)
+            .First(r => r.Id == id);
+        return TypedResults.Ok(reservation);
+    });
 
 app.Run();
