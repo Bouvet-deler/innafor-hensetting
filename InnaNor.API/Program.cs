@@ -32,7 +32,7 @@ app.MapGet("/spaces", (InnaNorContext db) =>
     {
         s.Id,
         s.Name,
-        s.Beskrivelse,
+        s.Description,
     }));
 app.MapGet("/spaces/{id:int}", (int id, InnaNorContext db) => db.Spaces.Find(id));
 app.MapGet("/spaces/{id:int}/reservations", (int id, InnaNorContext db) => db.Reservations.Where(r => r.SpaceId == id));

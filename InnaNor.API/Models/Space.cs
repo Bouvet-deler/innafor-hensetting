@@ -9,12 +9,12 @@ public class Space
 {
     [DatabaseGenerated(DatabaseGeneratedOption.None)]
     public int Id { get; set; }
-    [StringLength(13)]
-    public required string GlobalId { get; set; }
+
+    [StringLength(13)] public required string GlobalId { get; set; }
     public required string LocationId { get; set; }
     public required Location Location { get; set; }
 
-    public string? Beskrivelse { get; set; }
+    public string? Description { get; set; }
 
     public required string Name { get; set; }
 
@@ -32,8 +32,7 @@ public class Space
 
     public DateTime LastChanged { get; set; }
 
-    [StringLength(13)]
-    public required string BelongsTo { get; set; }
+    [StringLength(13)] public required string BelongsTo { get; set; }
 
     public int TrackPriority { get; set; }
 

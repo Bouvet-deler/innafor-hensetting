@@ -3,6 +3,7 @@ using System;
 using InnaNor.API.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace InnaNor.API.Migrations
 {
     [DbContext(typeof(InnaNorContext))]
-    partial class InnaNorContextModelSnapshot : ModelSnapshot
+    [Migration("20230726070050_Fix_Norwegian_Column_Name")]
+    partial class Fix_Norwegian_Column_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.8");
