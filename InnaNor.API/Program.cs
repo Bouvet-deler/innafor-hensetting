@@ -1,4 +1,5 @@
-﻿using InnaNor.API.Models;
+﻿using InnaNor.API.DTOs;
+using InnaNor.API.Models;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -43,35 +44,35 @@ app.UseAuthorization();
 // app.MapControllers();
 
 app.MapGet("/spaces", (InnaNorContext db) =>
-    db.Spaces.Select(s => new
+    db.Spaces.Select(s => new SpaceOverviewDto
     {
-        s.Id,
-        s.Name,
-        s.Description,
+        Id = s.Id,
+        Name = s.Name,
+        Description = s.Description,
     }));
 app.MapGet("/spaces/{id:int}", (int id, InnaNorContext db) => db.Spaces.Find(id));
 app.MapGet("/spaces/{id:int}/reservations", (int id, InnaNorContext db) => db.Reservations.Where(r => r.SpaceId == id));
 
 app.MapGet("/locations", (InnaNorContext db) =>
-    db.Locations.Select(l => new
+    db.Locations.Select(l => new LocationOverviewDto
     {
-        l.Id,
-        l.TrackNumber,
-        l.Area,
-        l.Status,
+        Id = l.Id,
+        TrackNumber = l.TrackNumber,
+        Area = l.Area,
+        Status = l.Status,
     }));
-app.MapGet("/locations/{id:int}", (int id, InnaNorContext db) => db.Locations.Find(id));
+app.MapGet("/locations/{id}", (string id, InnaNorContext db) => db.Locations.Find(id));
 
 app.MapGet("/reservations", (InnaNorContext db) =>
-    db.Reservations.Select(r => new
+    db.Reservations.Select(r => new ReservationOverviewDto
     {
-        r.Id,
+        Id = r.Id,
         SpaceId = r.Space.Id,
-        r.Space.Name,
-        r.Reserver,
-        r.StartTime,
-        r.EndTime,
+        SpaceName = r.Space.Name,
+        Reserver = r.Reserver,
+        StartTime = r.StartTime,
+        EndTime = r.EndTime,
     }));
-app.MapGet("/reservations/{id:int}", (int id, InnaNorContext db) => db.Reservations.Find(id));
+app.MapGet("/reservations/{id:guid}", (Guid id, InnaNorContext db) => db.Reservations.Find(id));
 
 app.Run();
