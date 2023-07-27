@@ -8,6 +8,8 @@ Start med å se på `Program.cs` for å få oversikt over prosjektet.
 
 Dette prosjektet er både ment å kunne brukes som den er for de som har lyst til å fokusere på brukergrensesnitt og som ikke trenger mer enn det som allerede er tilgjengelig her (selv om det ikke er ideelt representert og inndelt), og som utgangspunkt for de som har lyst til å utvikle backend i .NET som en del av løsningen sin.
 
+Prosjektet er strukturert for å gjøre det lettest mulig å få oversikt og gjøre endringer i den korte tiden tilgjengelig til utvikling av prototype, selv for de som ikke har tidligere erfaring med C# og .NET.
+
 Prosjektet tilgjengeligjør data hentet fra Excelarkene nevnt i oppgaven gjennom disse endepunktene:
 
 - GET /spaces: Henter en oversikt over alle hensettingsplasser
