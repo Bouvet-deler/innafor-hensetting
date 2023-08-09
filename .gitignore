@@ -5,3 +5,7 @@ riderModule.iml
 /_ReSharper.Caches/
 InnaNor.sln.DotSettings.user
 *.db
+*.db-shm
+*.db-wal
+.vs/
+.vscode/
